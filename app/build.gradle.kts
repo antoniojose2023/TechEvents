@@ -46,4 +46,22 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    val lifecycle_version = "2.11.0"
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
+
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+
+    //implementation("androidx.activity:activity-ktx:1.13.0")
+
+    //coil
+    implementation("io.coil-kt:coil:2.6.0")
+
+
+
 }

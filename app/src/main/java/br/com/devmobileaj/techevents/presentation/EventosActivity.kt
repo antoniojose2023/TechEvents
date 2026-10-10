@@ -1,16 +1,23 @@
 package br.com.devmobileaj.techevents.presentation
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.devmobileaj.techevents.R
 import br.com.devmobileaj.techevents.databinding.ActivityEventosBinding
+import br.com.devmobileaj.techevents.util.States
 
 class EventosActivity : AppCompatActivity() {
     private val binding by lazy{ ActivityEventosBinding.inflate( layoutInflater ) }
+
+    private val techEventViewModel: TechEventViewModel by viewModels()
+    private val techEventAdapter = TechEventAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +30,33 @@ class EventosActivity : AppCompatActivity() {
         }
 
 
+        configurarRecyclerView()
 
+        techEventViewModel.getEvents().observe(this){ states ->
+
+            when(states){
+                is States.Loading -> {
+                     Toast.makeText(this, "carregando", Toast.LENGTH_SHORT).show()
+                }
+                is States.OnSucesso -> {
+                    techEventAdapter.addEventos(states.eventos)
+                }
+                is States.OnError -> {
+                    Toast.makeText(this, "Erro - ${states.mensagem}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        configurarRecyclerView()
+    }
+
+
+    fun configurarRecyclerView(){
+          binding.rvEventos.layoutManager = LinearLayoutManager(this)
+          binding.rvEventos.adapter = techEventAdapter
     }
 }
