@@ -7,7 +7,7 @@ import br.com.devmobileaj.techevents.databinding.ItemEventoBinding
 import br.com.devmobileaj.techevents.domain.Evento
 import okhttp3.internal.notify
 
-class TechEventAdapter: RecyclerView.Adapter<TechEventAdapter.TechEventViewHolder>() {
+class TechEventAdapter(var onClickEventos: (Evento) -> Unit = {}): RecyclerView.Adapter<TechEventAdapter.TechEventViewHolder>() {
 
     private var eventos = mutableListOf<Evento>()
 
@@ -49,6 +49,10 @@ class TechEventAdapter: RecyclerView.Adapter<TechEventAdapter.TechEventViewHolde
                   tvEstadoEventoItem.text = evento.state
                   tvPrecoEventoItem.text = evento.price
                   tvTipoEventoItem.text = evento.type
+             }
+
+             itemView.setOnClickListener {
+                   onClickEventos(evento)
              }
 
         }

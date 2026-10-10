@@ -1,5 +1,7 @@
 package br.com.devmobileaj.techevents.domain
 
+import java.io.Serializable
+
 data class Evento(
     val address: String,
     val category: String,
@@ -18,4 +20,4 @@ data class Evento(
     val title: String,
     val totalSeats: Int,
     val type: String
-)
+): Serializable

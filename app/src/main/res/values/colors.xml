@@ -6,4 +6,9 @@
     <color name="cinza">#E9E5E5</color>
 
     <color name="verde">#009688</color>
+    <color name="laranja">#FFC107</color>
+    <color name="azul">#0A3CAF</color>
+
+    <color name="azul_escuro">#061033</color>
+    <color name="verde_claro">#8BC34A</color>
 </resources>

@@ -1,5 +1,6 @@
 package br.com.devmobileaj.techevents.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -30,10 +31,16 @@ class EventosActivity : AppCompatActivity() {
         }
 
 
+        techEventAdapter.onClickEventos = { evento ->
+            val intent = Intent(this, DetalhesEventoActivity::class.java)
+            intent.putExtra("evento", evento)
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out )
+        }
+
         configurarRecyclerView()
 
         techEventViewModel.getEvents().observe(this){ states ->
-
             when(states){
                 is States.Loading -> {
                      Toast.makeText(this, "carregando", Toast.LENGTH_SHORT).show()
@@ -45,7 +52,6 @@ class EventosActivity : AppCompatActivity() {
                     Toast.makeText(this, "Erro - ${states.mensagem}", Toast.LENGTH_SHORT).show()
                 }
             }
-
         }
     }
 
