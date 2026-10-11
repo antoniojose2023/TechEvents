@@ -1,4 +1,4 @@
-package br.com.devmobileaj.techevents.presentation
+package br.com.devmobileaj.techevents.presentation.view
 
 import android.os.Build
 import android.os.Bundle
@@ -81,6 +81,9 @@ class DetalhesEventoActivity : AppCompatActivity() {
             }
             "ONLINE" ->{
                 binding.chipTipoEventoDetalhe.chipBackgroundColor = getColorStateList( R.color.verde_claro )
+            }
+            "HIBRIDO" ->{
+                binding.chipTipoEventoDetalhe.chipBackgroundColor = getColorStateList( R.color.laranja_escuro )
             }
 
         }

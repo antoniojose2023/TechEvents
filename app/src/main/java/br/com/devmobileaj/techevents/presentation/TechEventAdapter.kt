@@ -2,10 +2,11 @@ package br.com.devmobileaj.techevents.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import br.com.devmobileaj.techevents.R
 import br.com.devmobileaj.techevents.databinding.ItemEventoBinding
 import br.com.devmobileaj.techevents.domain.Evento
-import okhttp3.internal.notify
 
 class TechEventAdapter(var onClickEventos: (Evento) -> Unit = {}): RecyclerView.Adapter<TechEventAdapter.TechEventViewHolder>() {
 
@@ -49,6 +50,20 @@ class TechEventAdapter(var onClickEventos: (Evento) -> Unit = {}): RecyclerView.
                   tvEstadoEventoItem.text = evento.state
                   tvPrecoEventoItem.text = evento.price
                   tvTipoEventoItem.text = evento.type
+             }
+
+             when(evento.category){
+                 "Android" ->{
+                     binding.tvCategoriaItem.background = ContextCompat.getDrawable(itemView.context, R.drawable.fundo_tv_categoria_android)
+                 }
+                 "Flutter" ->{
+                     binding.tvCategoriaItem.background = ContextCompat.getDrawable(itemView.context, R.drawable.fundo_tv_categoria_flutter)
+                 }
+                 "Kotlin" ->{
+                     binding.tvCategoriaItem.background = ContextCompat.getDrawable(itemView.context, R.drawable.fundo_tv_categoria_kotlin)
+                 }
+
+
              }
 
              itemView.setOnClickListener {

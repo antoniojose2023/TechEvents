@@ -1,4 +1,4 @@
-package br.com.devmobileaj.techevents.presentation
+package br.com.devmobileaj.techevents.presentation.view
 
 import android.content.Intent
 import android.os.Bundle

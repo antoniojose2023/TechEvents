@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TechEvents">
         <activity
-            android:name=".presentation.SplashScreenActivity"
+            android:name=".presentation.view.SplashScreenActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait">
@@ -29,12 +29,12 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".presentation.EventosActivity"
+            android:name=".presentation.view.EventosActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".presentation.DetalhesEventoActivity"
+            android:name=".presentation.view.DetalhesEventoActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"/>
