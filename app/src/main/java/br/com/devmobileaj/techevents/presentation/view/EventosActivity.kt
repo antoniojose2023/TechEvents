@@ -13,8 +13,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.devmobileaj.techevents.R
+import br.com.devmobileaj.techevents.data.TechEventRepository
 import br.com.devmobileaj.techevents.databinding.ActivityEventosBinding
 import br.com.devmobileaj.techevents.domain.Evento
+import br.com.devmobileaj.techevents.domain.ITechEventRepository
 import br.com.devmobileaj.techevents.presentation.TechEventAdapter
 import br.com.devmobileaj.techevents.presentation.viewmodel.TechEventViewModel
 import br.com.devmobileaj.techevents.util.States
@@ -23,7 +25,9 @@ import com.google.android.material.chip.Chip
 class EventosActivity : AppCompatActivity() {
     private val binding by lazy{ ActivityEventosBinding.inflate( layoutInflater ) }
 
-    private val techEventViewModel: TechEventViewModel by viewModels()
+    val techEventViewModel: TechEventViewModel by viewModels{
+          TechEventViewModel.Factory
+    }
     private val techEventAdapter = TechEventAdapter()
 
     private var listaEventos = mutableListOf<Evento>()
