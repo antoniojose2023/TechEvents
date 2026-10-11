@@ -26,7 +26,7 @@ Os dados vêm de uma **API mock** estática (arquivo JSON no GitHub Pages), o qu
 
 | Splash | Lista de eventos | Filtros aplicados | Detalhes do evento |
 |:---:|:---:|:---:|:---:|
-| <img src="docs/screenshots/splash.png" width="200"/> | <img src="docs/screenshots/lista.png" width="200"/> | <img src="docs/screenshots/filtros.png" width="200"/> | <img src="docs/screenshots/detalhes.png" width="200"/> |
+| <img width="1080" height="2400" alt="Image" src="https://github.com/user-attachments/assets/4e3f0de2-d9ff-48c2-82a2-7fa2bc5fc07d" /> | <img width="1080" height="2400" alt="Image" src="https://github.com/user-attachments/assets/aeed6d52-5af9-4969-b04f-4ac36de1df56" /> | <img width="1080" height="2400" alt="Image" src="https://github.com/user-attachments/assets/2eb6f3df-8de4-4bfb-8f61-92940a9c04a3" /> | <img width="1080" height="2400" alt="Image" src="https://github.com/user-attachments/assets/2427727b-a203-4355-a0f1-f7e348cf9df5" /> |
 
 > 💡 Salve os prints na pasta `docs/screenshots/` com os nomes acima (ou ajuste os caminhos da tabela).
 
