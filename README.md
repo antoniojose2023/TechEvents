@@ -55,7 +55,7 @@ Os dados vêm de uma **API mock** estática (arquivo JSON no GitHub Pages), o qu
 | **Material Components 1.14.0** | Chips, cards, botões e tema Material |
 | **ConstraintLayout** | Layout das telas |
 | **AppCompat / Activity KTX / Core KTX** | Componentes base do AndroidX |
-| **JUnit / Espresso** | Testes unitários e instrumentados |
+
 
 Build com **Gradle Kotlin DSL**, **Version Catalog** (`gradle/libs.versions.toml`) e **Android Gradle Plugin 9.4.1**.
 
