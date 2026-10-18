@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import br.com.devmobileaj.techevents.R
 import br.com.devmobileaj.techevents.data.TechEventRepository
 import br.com.devmobileaj.techevents.databinding.ActivityEventosBinding
@@ -30,7 +31,7 @@ class EventosActivity : AppCompatActivity() {
     }
     private val techEventAdapter = TechEventAdapter()
     private var statusListaRecyclerView = false
-    private var pagina = 0
+    private var pagina = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,21 +108,28 @@ class EventosActivity : AppCompatActivity() {
 
 
         //simulação paginação - pois essa api é fake e não tem paginação.
-        statusListaRecyclerView = binding.rvEventos.canScrollVertically(1)
-        if(!statusListaRecyclerView){
-            //chamar o metodo para incrementar a pagina
-            incrementarPagina()
-        }
+        /*binding.rvEventos.setOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                statusListaRecyclerView = recyclerView.canScrollVertically(1)
+                if(!statusListaRecyclerView){
+                    //chamar o metodo para incrementar a pagina
+                    incrementarPagina()
+                }
+            }
+        })  */
+
+
     }
 
-    fun incrementarPagina(){
+    /*fun incrementarPagina(){
           if(pagina <= 3){
               //chama o metodo para retorna a pagina 1
               //depois incrementa a pagina
               pagina++
-              Log.i("TAG", "incrementarPagina: $pagina")
+
           }
-    }
+    }*/
 
 
     override fun onStart() {
