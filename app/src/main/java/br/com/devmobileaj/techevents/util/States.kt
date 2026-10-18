@@ -4,6 +4,8 @@ import br.com.devmobileaj.techevents.domain.Evento
 
 open class States {
     object Loading : States()
+
+    object isEmptyListEevent : States()
     class OnSucesso(val eventos: List<Evento>) : States()
     class OnError(val mensagem: String) : States()
 }

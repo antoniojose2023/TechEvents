@@ -29,11 +29,7 @@ class EventosActivity : AppCompatActivity() {
           TechEventViewModel.Factory
     }
     private val techEventAdapter = TechEventAdapter()
-
-    private var listaEventos = mutableListOf<Evento>()
-
     private var statusListaRecyclerView = false
-
     private var pagina = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,21 +42,11 @@ class EventosActivity : AppCompatActivity() {
             insets
         }
 
-
-        //simulação paginação - pois essa api é fake e não tem paginação.
-        statusListaRecyclerView = binding.rvEventos.canScrollVertically(1)
-        if(!statusListaRecyclerView){
-              //chamar o metodo para incrementar a pagina
-              incrementarPagina()
-        }
-
-
-
         //consulta pelo edittext
         binding.editPesquisa.setOnEditorActionListener { v, actionId, event ->
              if(actionId == EditorInfo.IME_ACTION_SEARCH){
                   val texto = binding.editPesquisa.text.toString()
-                  getListaFiltradaSearViewPorNomeEvento( texto )
+                  techEventViewModel.busca(texto)
              }
 
             true
@@ -71,8 +57,8 @@ class EventosActivity : AppCompatActivity() {
         binding.chipGroupCategoria.setOnCheckedStateChangeListener { group, checkedIds ->
              val id = checkedIds.firstOrNull()
              val chip =  id?.let { group.findViewById<Chip>( it ) }
-             val texto = chip?.text.toString() ?: ""
-             getListaFiltradaChipPorCategoriaEvento( texto )
+             val texto = chip?.text.toString()
+             techEventViewModel.filtrarCategoria(texto)
 
         }
 
@@ -81,8 +67,8 @@ class EventosActivity : AppCompatActivity() {
         binding.chipGroupTipoEvento.setOnCheckedStateChangeListener { group, checkedIds ->
             val id = checkedIds.firstOrNull()
             val chip = id?.let { group.findViewById<Chip>( it ) }
-            val texto = chip?.text.toString() ?: ""
-            getListaFiltradaChipPorTipoEvento( texto )
+            val texto = chip?.text.toString()
+            techEventViewModel.filtrarTipo(texto)
 
         }
 
@@ -95,27 +81,41 @@ class EventosActivity : AppCompatActivity() {
 
         configurarRecyclerView()
 
-        techEventViewModel.getEvents().observe(this){ states ->
+        techEventViewModel.states.observe(this){ states ->
             when(states){
                 is States.Loading -> {
                      binding.progressBarCircula.visibility = View.VISIBLE
+                     binding.containerTelaError.visibility = View.GONE
                 }
                 is States.OnSucesso -> {
-                    listaEventos = states.eventos.toMutableList()
                     techEventAdapter.addEventos(states.eventos)
                     binding.progressBarCircula.visibility = View.GONE
+                    binding.containerTelaError.visibility = View.GONE
+                }
+                is States.isEmptyListEevent -> {
+                    binding.progressBarCircula.visibility = View.GONE
+                    binding.containerTelaError.visibility = View.VISIBLE
                 }
                 is States.OnError -> {
                     Toast.makeText(this, "Erro - ${states.mensagem}", Toast.LENGTH_SHORT).show()
                     binding.progressBarCircula.visibility = View.GONE
                     binding.containerTelaError.visibility = View.VISIBLE
+
                 }
             }
+        }
+
+
+        //simulação paginação - pois essa api é fake e não tem paginação.
+        statusListaRecyclerView = binding.rvEventos.canScrollVertically(1)
+        if(!statusListaRecyclerView){
+            //chamar o metodo para incrementar a pagina
+            incrementarPagina()
         }
     }
 
     fun incrementarPagina(){
-          if(pagina <= 10){
+          if(pagina <= 3){
               //chama o metodo para retorna a pagina 1
               //depois incrementa a pagina
               pagina++
@@ -134,55 +134,5 @@ class EventosActivity : AppCompatActivity() {
           binding.rvEventos.layoutManager = LinearLayoutManager(this)
           binding.rvEventos.adapter = techEventAdapter
     }
-
-    fun getListaFiltradaSearViewPorNomeEvento(textoPesquisa: String){
-         val listaFiltrada = if(textoPesquisa.isNullOrEmpty()){
-               listaEventos
-         }else{
-               listaEventos.filter{ it ->
-                    it.title.contains( textoPesquisa )
-               }
-         }
-
-
-         techEventAdapter.addEventos( listaFiltrada )
-    }
-
-    fun getListaFiltradaChipPorCategoriaEvento(textoPesquisa: String){
-        val listaFiltrada = if(textoPesquisa.isNullOrEmpty()){
-            listaEventos
-        }else{
-            listaEventos.filter{ it ->
-                it.category.contains( textoPesquisa )
-            }
-        }
-
-        if(listaFiltrada.isEmpty()){
-            binding.containerTelaError.visibility = View.VISIBLE
-        }else{
-            binding.containerTelaError.visibility = View.GONE
-        }
-
-        techEventAdapter.addEventos( listaFiltrada )
-    }
-
-    fun getListaFiltradaChipPorTipoEvento(textoPesquisa: String){
-        val listaFiltrada = if(textoPesquisa.isNullOrEmpty()){
-            listaEventos
-        }else{
-            listaEventos.filter{ it ->
-                it.type.contains( textoPesquisa )
-            }
-        }
-
-        if(listaFiltrada.isEmpty()){
-            binding.containerTelaError.visibility = View.VISIBLE
-        }else{
-            binding.containerTelaError.visibility = View.GONE
-        }
-
-        techEventAdapter.addEventos( listaFiltrada )
-    }
-
 
 }

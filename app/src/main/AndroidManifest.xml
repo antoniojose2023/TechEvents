@@ -25,10 +25,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
             android:name=".presentation.view.EventosActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"

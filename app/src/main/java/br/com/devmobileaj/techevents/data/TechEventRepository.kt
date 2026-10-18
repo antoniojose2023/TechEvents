@@ -3,31 +3,37 @@ package br.com.devmobileaj.techevents.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import br.com.devmobileaj.techevents.domain.Evento
 import br.com.devmobileaj.techevents.domain.ITechEventRepository
 import br.com.devmobileaj.techevents.util.States
+import kotlin.jvm.Throws
 
 class TechEventRepository: ITechEventRepository {
     private val serviceApiTechEvent = RetrofitHelper.getServiceApiTechEvent()
 
-     /*fun getEvents() = liveData {
 
-          emit(States.Loading)
+    override suspend fun getEventRepository(): List<Evento> {
+        val response = serviceApiTechEvent.getEvents()
+        return response.body() ?: throw Exception("Erro ao buscar eventos")
+    }
 
-           try {
-               val response = serviceApiTechEvent.getEvents()
-               if (response.isSuccessful && response.body() != null) {
-                   emit(States.OnSucesso(response.body()!!))
-               } else {
-                   emit(States.OnError("Erro ao buscar eventos"))
-               }
+    /*fun getEvents() = liveData {
+         emit(States.Loading)
 
-           }catch (ex: Exception){
-               Log.i("TAG", "getEvents: ${ex.message}")
-           }
+          try {
+              val response = serviceApiTechEvent.getEvents()
+              if (response.isSuccessful && response.body() != null) {
+                  emit(States.OnSucesso(response.body()!!))
+              } else {
+                  emit(States.OnError("Erro ao buscar eventos"))
+              }
 
-     }*/
+          }catch (ex: Exception){
+              Log.i("TAG", "getEvents: ${ex.message}")
+          }
+    }*/
 
-    override fun getEventRepository(): LiveData<States> {
+    /*override fun getEventRepository(): LiveData<States> {
         return liveData {
 
             emit(States.Loading)
@@ -45,6 +51,6 @@ class TechEventRepository: ITechEventRepository {
             }
 
         }
-    }
+    }*/
 
 }
